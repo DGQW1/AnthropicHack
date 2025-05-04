@@ -1,0 +1,36 @@
+# Environment variables
+.env
+.env.*
+
+# Python environment
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Testing
+.coverage
+htmlcov/
+
+# Data files
+data/
+rag_backend/data/
+
+# Log files
+*.log
+process_log.txt
+server_log.txt
+
+# API keys and sensitive data
+*api_key*
+*API_KEY*
+
+# IDE
+.vscode/
+.idea/ 
