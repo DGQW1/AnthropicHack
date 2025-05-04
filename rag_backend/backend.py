@@ -24,17 +24,145 @@ class ConceptExtractor:
     def __init__(self, anthropic_client):
         self.client = anthropic_client
     
-    def extract_concepts(self, text):
-        """Extract key concepts from text using NLP techniques"""
-        # Simplifying to a more generic approach without preset concepts
+    def extract_file_concept(self, file_path):
+        """
+        Process a file to generate a one-sentence summary and extract a single key concept.
+        This function reads the entire file and uses Claude 3.5 Haiku to generate the summary and concept.
         
-        # 1. Convert text to lowercase and remove punctuation
-        text = text.lower()
+        Args:
+            file_path: Path to the file to process
+            
+        Returns:
+            dict: Contains 'summary' (one sentence) and 'key_concept' (single concept)
+        """
+        try:
+            # Check if file exists
+            if not os.path.exists(file_path):
+                return {
+                    "summary": f"File not found: {file_path}",
+                    "key_concept": ""
+                }
+            
+            # Read the entire file directly
+            try:
+                if file_path.lower().endswith('.pdf'):
+                    # Handle PDF files
+                    doc = fitz.open(file_path)
+                    full_text = ""
+                    for page in doc:
+                        full_text += "\n\n" + page.get_text().strip()
+                else:
+                    # Handle text files
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        full_text = f.read()
+            except Exception as e:
+                return {
+                    "summary": f"Error reading file: {str(e)}",
+                    "key_concept": ""
+                }
+            
+            # Truncate if text is too long
+            max_length = 20000  # Claude's context limit is higher, but we'll be conservative
+            if len(full_text) > max_length:
+                print(f"Text too long ({len(full_text)} chars), truncating to {max_length} chars")
+                full_text = full_text[:max_length]
+            
+            # If Claude API is not available, fall back to basic extraction
+            if not self.client:
+                # Extract a basic summary from first paragraph
+                paragraphs = full_text.split('\n\n')
+                basic_summary = paragraphs[0][:200] + "..." if paragraphs and len(paragraphs[0]) > 200 else paragraphs[0] if paragraphs else "Summary not available"
+                
+                # Extract a basic concept using our frequency approach
+                basic_concept = self.extract_concepts_basic(full_text)[0] if full_text else "concept not available"
+                
+                return {
+                    "summary": basic_summary,
+                    "key_concept": basic_concept
+                }
+            
+            # First call: Summarize the entire file in one sentence
+            try:
+                summary_prompt = f"""
+                This is content from a computer science education document.
+                
+                Content: {full_text}
+                
+                Please summarize this document in exactly one sentence. Focus on the main topic being discussed.
+                """
+                
+                summary_response = self.client.messages.create(
+                    model="claude-3-5-haiku-20241022",
+                    max_tokens=200,
+                    temperature=0,
+                    system="You are a computer science education expert who creates concise, accurate summaries.",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": summary_prompt
+                        }
+                    ]
+                )
+                
+                summary = summary_response.content[0].text.strip()
+                # Remove quotes if Claude returned the summary in quotes
+                summary = summary.strip('"\'')
+                
+                # Second call: Extract one key concept
+                concept_prompt = f"""
+                This is content from a computer science education document.
+                
+                Content: {full_text}
+                
+                What is the single most important computer science concept discussed in this document?
+                Return ONLY the concept name, with no additional text or explanation.
+                """
+                
+                concept_response = self.client.messages.create(
+                    model="claude-3-5-haiku-20241022",
+                    max_tokens=50,
+                    temperature=0,
+                    system="You are a computer science education expert who identifies the most important technical concepts.",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": concept_prompt
+                        }
+                    ]
+                )
+                
+                key_concept = concept_response.content[0].text.strip()
+                # Remove quotes if Claude returned the concept in quotes
+                key_concept = key_concept.strip('"\'')
+                
+                return {
+                    "summary": summary,
+                    "key_concept": key_concept
+                }
+                
+            except Exception as e:
+                print(f"Error using Claude API: {e}")
+                return {
+                    "summary": f"Error generating summary with Claude: {str(e)}",
+                    "key_concept": ""
+                }
+                
+        except Exception as e:
+            print(f"Error in file processing: {e}")
+            return {
+                "summary": f"Error processing file: {str(e)}",
+                "key_concept": ""
+            }
+    
+    def extract_concepts_basic(self, text):
+        """Basic frequency-based concept extraction as fallback"""
+        # Convert text to lowercase and remove punctuation
+        text_lower = text.lower()
         for char in ".,;:!?()[]{}\"\"''-—":
-            text = text.replace(char, ' ')
+            text_lower = text_lower.replace(char, ' ')
         
-        # 2. Get all words and phrases (1-3 words)
-        words = text.split()
+        # Get all words and phrases (1-3 words)
+        words = text_lower.split()
         phrases = []
         
         # Add single words (excluding common stop words)
@@ -62,7 +190,7 @@ class ConceptExtractor:
                 words[i+2] not in stop_words):
                 phrases.append(words[i] + ' ' + words[i+1] + ' ' + words[i+2])
         
-        # 3. Count phrase frequencies
+        # Count phrase frequencies
         phrase_counts = {}
         for phrase in phrases:
             if phrase in phrase_counts:
@@ -70,36 +198,38 @@ class ConceptExtractor:
             else:
                 phrase_counts[phrase] = 1
         
-        # 4. Sort by frequency and length
+        # Sort by frequency and length
         sorted_phrases = sorted(phrase_counts.items(), 
                                key=lambda x: (x[1], len(x[0])), 
                                reverse=True)
         
-        # 5. Get top phrases as concepts (max 10)
-        concepts = []
-        for phrase, count in sorted_phrases[:20]:
+        # Get top phrases as candidates (up to 20)
+        candidate_concepts = []
+        for phrase, count in sorted_phrases[:30]:
             # Only add if it appears at least twice
             if count >= 2:
-                concepts.append(phrase)
-            if len(concepts) >= 10:
+                candidate_concepts.append(phrase)
+            if len(candidate_concepts) >= 20:
                 break
         
-        # 6. If we didn't find any concepts, add some generic ones
-        if not concepts:
+        # If we didn't find any candidates, add some generic ones
+        if not candidate_concepts:
             # Find any capitalized terms (likely important)
             for word in text.split():
                 original_word = word.strip().strip(".,;:!?()[]{}\"\"'")
                 if original_word and original_word[0].isupper() and len(original_word) > 3:
-                    concepts.append(original_word.lower())
-                    if len(concepts) >= 5:
+                    candidate_concepts.append(original_word.lower())
+                    if len(candidate_concepts) >= 5:
                         break
             
             # Still nothing? Add "computer science" as default
-            if not concepts:
-                concepts.append("computer science")
+            if not candidate_concepts:
+                candidate_concepts.append("computer science")
         
-        print(f"Extracted concepts: {concepts}")
-        return concepts
+        # Limit to top 10
+        final_concepts = candidate_concepts[:10]
+        print(f"Extracted concepts via frequency: {final_concepts}")
+        return final_concepts
 
 class RAGSystem:
     """Main RAG system for processing documents and retrieving by concept"""
@@ -231,7 +361,7 @@ class RAGSystem:
                     # If this is from the questions folder, extract concepts and build mapping
                     if "270questions" in path:
                         for chunk in file_chunks:
-                            concepts = self.concept_extractor.extract_concepts(chunk["text"])
+                            concepts = self.concept_extractor.extract_concepts_basic(chunk["text"])
                             print(f"  Extracted concepts: {concepts}")
                             for concept in concepts:
                                 self.concept_to_questions[concept].append({
@@ -292,7 +422,7 @@ class RAGSystem:
         
         # Extract concepts from each chunk and build concept mapping
         for i, chunk in enumerate(chunks):
-            concepts = self.concept_extractor.extract_concepts(chunk["text"])
+            concepts = self.concept_extractor.extract_concepts_basic(chunk["text"])
             for concept in concepts:
                 self.concept_to_chunks[concept].append(i)  # Store chunk index
                 self.all_concepts.add(concept)
@@ -379,6 +509,104 @@ class RAGSystem:
             "content": content,
             "questions": questions
         }
+    
+    def summarize_file(self, file_path):
+        """Summarize an entire file and extract its key concept"""
+        try:
+            # Determine file type and extract chunks appropriately
+            chunks = []
+            if file_path.lower().endswith('.pdf'):
+                chunks = self.extract_pdf_chunks(file_path)
+            elif file_path.lower().endswith(('.txt', '.md')):
+                chunks = self.process_text_file(file_path)
+            else:
+                return {"summary": f"Unsupported file type: {file_path}", "key_concept": ""}
+                
+            if not chunks:
+                return {"summary": "Could not extract content from file.", "key_concept": ""}
+            
+            # Combine chunk texts, limiting to prevent token overflow
+            all_text = ""
+            for chunk in chunks:
+                # Handle both dictionary format and object format
+                if isinstance(chunk, dict):
+                    chunk_text = chunk.get("text", "")
+                else:
+                    chunk_text = getattr(chunk, "text", "")
+                    
+                all_text += chunk_text + "\n\n"
+                if len(all_text) > 12000:  # Keep under Claude's context window
+                    break
+            
+            # Use Claude to generate summary and key concept
+            if self.concept_extractor.client:
+                try:
+                    prompt = f"""
+                    This is content from a computer science education document.
+                    
+                    Content: {all_text[:12000]}
+                    
+                    Please provide:
+                    1. A concise one-sentence summary of what this document discusses
+                    2. The single most important computer science concept in this document
+                    
+                    Format your response as JSON with "summary" and "key_concept" fields.
+                    """
+                    
+                    response = self.concept_extractor.client.messages.create(
+                        model="claude-3-5-haiku-20241022",
+                        max_tokens=200,
+                        temperature=0,
+                        system="You are a computer science education expert who creates concise, accurate summaries.",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": prompt
+                            }
+                        ]
+                    )
+                    
+                    # Parse the JSON response
+                    import json
+                    import re
+                    
+                    # Extract JSON from the response
+                    response_text = response.content[0].text
+                    json_match = re.search(r'```json\n(.*?)\n```', response_text, re.DOTALL)
+                    if not json_match:
+                        json_match = re.search(r'{.*}', response_text, re.DOTALL)
+                    
+                    if json_match:
+                        json_str = json_match.group(1) if '```json' in response_text else json_match.group(0)
+                        result = json.loads(json_str)
+                        return result
+                    
+                    # Fallback if JSON parsing fails
+                    return {
+                        "summary": "Content extraction failed. Try processing the file again.",
+                        "key_concept": ""
+                    }
+                    
+                except Exception as e:
+                    print(f"Error using Claude API for file summarization: {e}")
+                    return {
+                        "summary": "Failed to summarize content using AI.",
+                        "key_concept": ""
+                    }
+            else:
+                # Fallback without Claude API
+                concepts = self.concept_extractor.extract_concepts_basic(all_text[:5000])
+                return {
+                    "summary": "Claude API not available for summarization.",
+                    "key_concept": concepts[0] if concepts else ""
+                }
+                
+        except Exception as e:
+            print(f"Error in file summarization: {e}")
+            return {
+                "summary": f"Error processing file: {str(e)}",
+                "key_concept": ""
+            }
 
 # Example usage
 if __name__ == "__main__":

@@ -1,0 +1,308 @@
+{
+  "270handout": [
+    {
+      "summary": "This document covers two dynamic programming problems: the coin changing problem and assembly-line scheduling, demonstrating how to break down complex optimization challenges into recursive subproblems with systematic decision-making strategies.",
+      "key_concept": "Dynamic Programming",
+      "file": "270handout7 (1).pdf",
+      "path": "270handout/270handout7 (1).pdf"
+    },
+    {
+      "summary": "This document explores various graph problem transformations, demonstrating how different computational problems like Bipartite Matching, Circulations, Survey Design, and Baseball Elimination can be reduced to network flow problems to solve them efficiently in polynomial time.",
+      "key_concept": "Network Flow",
+      "file": "270handout21.pdf",
+      "path": "270handout/270handout21.pdf"
+    },
+    {
+      "summary": "This document discusses various polynomial-time reductions in computer science, specifically demonstrating how problems like Minimum Cut, Bipartite Matching, and Circulations can be solved efficiently by transforming them into network flow problems using algorithmic techniques.",
+      "key_concept": "Poly-Time Reductions",
+      "file": "270handout20.pdf",
+      "path": "270handout/270handout20.pdf"
+    },
+    {
+      "summary": "Dynamic Programming is a problem-solving technique that transforms recursive algorithms into iterative solutions by systematically breaking down complex problems into simpler subproblems and storing intermediate results to avoid redundant computations.",
+      "key_concept": "Dynamic Programming",
+      "file": "270handout5 (1).pdf",
+      "path": "270handout/270handout5 (1).pdf"
+    },
+    {
+      "summary": "This document discusses a project selection problem where the goal is to find the maximum-valued subset of projects while considering their prerequisites, using graph-based techniques and min-cut analysis to optimize project selection.",
+      "key_concept": "Graph Reduction",
+      "file": "270handout22.pdf",
+      "path": "270handout/270handout22.pdf"
+    },
+    {
+      "summary": "This lecture notes discuss greedy algorithms, focusing on techniques for solving problems like all-pairs shortest paths and interval scheduling, with an emphasis on proving algorithm correctness through inductive reasoning and sequential decision-making.",
+      "key_concept": "Greedy Algorithms",
+      "file": "270handout10 (1).pdf",
+      "path": "270handout/270handout10 (1).pdf"
+    },
+    {
+      "summary": "This document explores the concept of NP (Nondeterministic Polynomial Time) in computer science, discussing computational complexity, NP-complete problems like Circuit-SAT, and the fundamental question of whether P equals NP.",
+      "key_concept": "NP-Completeness",
+      "file": "270handout23.pdf",
+      "path": "270handout/270handout23.pdf"
+    },
+    {
+      "summary": "This document discusses an advanced caching optimization problem where the goal is to minimize cache misses by strategically deciding which items to remove from a cache with limited capacity when new items are requested.",
+      "key_concept": "Optimal Caching",
+      "file": "270handout15 (2).pdf",
+      "path": "270handout/270handout15 (2).pdf"
+    },
+    {
+      "summary": "This lecture on graph algorithms explores concepts of graph connectivity, directed acyclic graphs (DAGs), topological ordering, and related algorithmic challenges in graph theory.",
+      "key_concept": "Graph Connectivity",
+      "file": "270handout4 (1).pdf",
+      "path": "270handout/270handout4 (1).pdf"
+    },
+    {
+      "summary": "This lecture covers several computational complexity problems, including the Travelling Salesman Problem, Subset Sum, and graph coloring challenges with 3 and 4 colors, which involve finding specific solutions under given constraints.",
+      "key_concept": "NP-Completeness",
+      "file": "270handout27.pdf",
+      "path": "270handout/270handout27.pdf"
+    },
+    {
+      "summary": "This lecture discusses sequencing problems like the Travelling Salesman Problem and Longest Path, exploring the characteristics of NP-complete problems and highlighting that the complexity of a problem can vary significantly depending on its specific constraints.",
+      "key_concept": "NP-Completeness",
+      "file": "270handout26.pdf",
+      "path": "270handout/270handout26.pdf"
+    },
+    {
+      "summary": "This lecture covers two main algorithmic topics: sequence alignment (calculating edit distance between strings using dynamic programming and divide-and-conquer techniques) and network flow (exploring max-flow/min-cut problems using the Ford-Fulkerson algorithm and residual graph concepts).",
+      "key_concept": "Network Flow",
+      "file": "270handout18 (1).pdf",
+      "path": "270handout/270handout18 (1).pdf"
+    },
+    {
+      "summary": "This lecture covers advanced computational complexity topics, including the Post Correspondence Problem (PCP), its connection to the Halting Problem, and an exploration of complexity classes like PSPACE, with a focus on demonstrating the undecidability of certain computational problems.",
+      "key_concept": "PSPACE",
+      "file": "270handout30.pdf",
+      "path": "270handout/270handout30.pdf"
+    },
+    {
+      "summary": "This lecture discusses NP-Complete problems, focusing on 3-SAT, Independent Set, Set Packing, and k-Clique, while exploring their relationships and the broader implications for the P vs NP problem.",
+      "key_concept": "NP-Completeness",
+      "file": "270handout24.pdf",
+      "path": "270handout/270handout24.pdf"
+    },
+    {
+      "summary": "This lecture discusses various NP-complete problems like Independent Set, Set Packing, k-Clique, and Hamiltonian Cycle, highlighting the complexity of these problems and the ongoing challenge of proving whether P equals NP.",
+      "key_concept": "NP-Completeness",
+      "file": "270handout25.pdf",
+      "path": "270handout/270handout25.pdf"
+    },
+    {
+      "summary": "This document discusses network flow algorithms, specifically the Ford-Fulkerson method for finding the maximum flow in a weighted directed graph, including concepts like residual graphs, augmenting paths, and the max-flow min-cut theorem.",
+      "key_concept": "Network Flow",
+      "file": "270handout19.pdf",
+      "path": "270handout/270handout19.pdf"
+    },
+    {
+      "summary": "This document discusses algorithmic approaches to two optimization problems: scheduling tasks to minimize lateness and optimal caching, exploring greedy algorithms and proof techniques for minimizing task tardiness and cache misses.",
+      "key_concept": "Greedy Algorithms",
+      "file": "270handout14.pdf",
+      "path": "270handout/270handout14.pdf"
+    },
+    {
+      "summary": "This document discusses theoretical computer science concepts including 3-D matching, the Halting Problem, the Barber Paradox, and the comparison of countable and uncountable infinite sets, highlighting fundamental challenges in computational theory and mathematical logic.",
+      "key_concept": "Halting Problem",
+      "file": "270handout28.pdf",
+      "path": "270handout/270handout28.pdf"
+    },
+    {
+      "summary": "This lecture explores the limits of computation by discussing the Halting Problem, countability, and using a proof by contradiction to demonstrate that certain computational problems are undecidable, specifically showing that no universal algorithm can determine whether an arbitrary computer program will halt or enter an infinite loop.",
+      "key_concept": "Undecidability",
+      "file": "270handout29.pdf",
+      "path": "270handout/270handout29.pdf"
+    },
+    {
+      "summary": "This document covers two dynamic programming algorithms in computer science: sequence alignment (edit distance between strings) and RNA secondary structure prediction, both focusing on efficiently solving optimization problems by breaking them down into smaller recursive subproblems.",
+      "key_concept": "Dynamic Programming",
+      "file": "270handout8 (1).pdf",
+      "path": "270handout/270handout8 (1).pdf"
+    },
+    {
+      "summary": "This lecture notes discuss the Longest Increasing Subsequence (LIS) problem, exploring recursive approaches to finding the longest increasing subsequence in a given sequence of numbers, while also briefly touching on polynomial runtime algorithms and primality testing.",
+      "key_concept": "Dynamic Programming",
+      "file": "270handout6.pdf",
+      "path": "270handout/270handout6.pdf"
+    },
+    {
+      "summary": "This lecture covers amortized runtime analysis, exploring the performance characteristics of list operations, binary counting, and minimum spanning tree algorithms like Kruskal's and Prim's, with a focus on understanding the average-case computational complexity of various algorithmic operations.",
+      "key_concept": "Amortized Runtime Analysis",
+      "file": "270handout2.pdf",
+      "path": "270handout/270handout2.pdf"
+    },
+    {
+      "summary": "This document discusses common proof errors when attempting to prove the correctness of Prim's Algorithm, and provides a detailed, step-by-step correct proof strategy for demonstrating that the algorithm produces an optimal minimum spanning tree.",
+      "key_concept": "Proof by Induction",
+      "file": "270handout12.pdf",
+      "path": "270handout/270handout12.pdf"
+    },
+    {
+      "summary": "This document describes a classroom exercise for CSCI 270 where students practice creating and grading proofs for a greedy algorithm that forms study groups with a specific composition of students and course participants (CPs).",
+      "key_concept": "Proof Techniques",
+      "file": "270handout13.pdf",
+      "path": "270handout/270handout13.pdf"
+    },
+    {
+      "summary": "This lecture introduces fundamental computer science concepts including algorithm design, problem-solving strategies, the famous person problem, stable matching algorithms, and the ethical considerations of algorithmic decision-making.",
+      "key_concept": "Algorithms",
+      "file": "270handout1.pdf",
+      "path": "270handout/270handout1.pdf"
+    },
+    {
+      "summary": "This document discusses greedy algorithm design and proof techniques, specifically focusing on interval scheduling and minimum spanning trees, and provides a detailed template for proving the correctness of greedy algorithms using inductive reasoning.",
+      "key_concept": "Greedy Algorithms",
+      "file": "270handout11.pdf",
+      "path": "270handout/270handout11.pdf"
+    },
+    {
+      "summary": "This lecture notes discuss two dynamic programming algorithms: the Subset Sum problem for determining if a subset of integers can sum to a target value, and the Shortest Path problem (Bellman-Ford algorithm) for finding the minimum path length between nodes in a graph.",
+      "key_concept": "Dynamic Programming",
+      "file": "270handout9 (1).pdf",
+      "path": "270handout/270handout9 (1).pdf"
+    },
+    {
+      "summary": "This lecture notes document covers three divide and conquer algorithms: All Pairs Shortest Paths, Integer Multiplication, and finding the Closest Points on a Plane, exploring their recursive strategies, base cases, runtime complexities, and potential optimizations.",
+      "key_concept": "Divide and Conquer",
+      "file": "270handout17 (1).pdf",
+      "path": "270handout/270handout17 (1).pdf"
+    },
+    {
+      "summary": "This lecture on Divide and Conquer introduces the algorithmic technique of solving problems by recursively splitting them into smaller, independent subproblems, discussing its application in algorithms like MergeSort and QuickSort, and exploring the Master Theorem for analyzing recurrence relations.",
+      "key_concept": "Divide and Conquer",
+      "file": "270handout16 (1).pdf",
+      "path": "270handout/270handout16 (1).pdf"
+    },
+    {
+      "summary": "This lecture notes document covers Union-Find data structures, Kruskal's algorithm for minimum spanning trees, sorting algorithm complexity (including comparison-based sorting lower bounds), and graph theory concepts like bipartite graphs.",
+      "key_concept": "Union-Find",
+      "file": "270handout3 (1).pdf",
+      "path": "270handout/270handout3 (1).pdf"
+    }
+  ],
+  "270questions": [
+    {
+      "summary": "This is a computer science homework assignment (CSCI 270) containing four algorithmic problem-solving challenges involving graph partitioning, dynamic programming for frog hopping, palindrome substring detection, and a game theory problem with a linked list.",
+      "key_concept": "Dynamic Programming",
+      "file": "270HW3.pdf",
+      "path": "270questions/270HW3.pdf"
+    },
+    {
+      "summary": "This homework assignment for CSCI 270 covers advanced data structure problems involving stacks, queues, amortized analysis, and sorting algorithms, with four specific algorithmic challenges related to stack/queue operations, runtime complexity, and k-sorted array sorting.",
+      "key_concept": "Data Structures",
+      "file": "270HW2.pdf",
+      "path": "270questions/270HW2.pdf"
+    },
+    {
+      "summary": "This is a computer science homework assignment (CSCI 270) containing four problems that cover topics in algorithm complexity, big O notation, mathematical proofs, and graph theory, focusing on analyzing function growth, proving mathematical claims, and solving theoretical problems.",
+      "key_concept": "Asymptotic Complexity",
+      "file": "270HW1.pdf",
+      "path": "270questions/270HW1.pdf"
+    },
+    {
+      "summary": "This is a computer science homework assignment (CSCI 270 Homework #5) presenting three algorithmic problem-solving challenges involving task scheduling, homework point optimization, and balloon shooting strategy, with an emphasis on applying greedy or dynamic programming approaches.",
+      "key_concept": "Greedy Algorithm",
+      "file": "270HW5.pdf",
+      "path": "270questions/270HW5.pdf"
+    },
+    {
+      "summary": "This is a computer science homework assignment (CSCI 270) containing four dynamic programming and greedy algorithm problems involving binary search trees, potion mixing, road trip gas station optimization, and coin denomination challenges.",
+      "key_concept": "Dynamic Programming",
+      "file": "270HW4.pdf",
+      "path": "270questions/270HW4.pdf"
+    },
+    {
+      "summary": "This is a computer science homework assignment (CSCI 270) with four algorithmic problem-solving questions focusing on divide-and-conquer techniques, runtime analysis, and algorithm design across various computational scenarios.",
+      "key_concept": "Divide-and-Conquer",
+      "file": "270HW6.pdf",
+      "path": "270questions/270HW6.pdf"
+    },
+    {
+      "summary": "This is a computer science homework assignment (CSCI 270) containing four algorithmic problem-solving questions related to flow networks, seating arrangements, student program assignments, and student identification.",
+      "key_concept": "Flow Networks",
+      "file": "270HW7.pdf",
+      "path": "270questions/270HW7.pdf"
+    },
+    {
+      "summary": "This document presents four complex computational problems (Traveling Hulk, Frequency Allocation, Star Lord, and Triangle-Free Vertex Cover) with detailed descriptions and a request to prove their NP-Completeness, likely as part of a computer science algorithms or complexity theory homework assignment.",
+      "key_concept": "NP-Completeness",
+      "file": "270HW9.pdf",
+      "path": "270questions/270HW9.pdf"
+    },
+    {
+      "summary": "This is a computer science homework assignment focusing on computational complexity, specifically exploring problems like k-Flow, NP-completeness, network flow, and various complexity-related true/false questions across graph theory and algorithmic problem solving.",
+      "key_concept": "NP-Completeness",
+      "file": "270HW8.pdf",
+      "path": "270questions/270HW8.pdf"
+    }
+  ],
+  "270slides": [
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x95 in position 16: invalid start byte",
+      "key_concept": "",
+      "file": "7-Divide & Conquer.pptx",
+      "path": "270slides/7-Divide & Conquer.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x84 in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "8-Network Flow.pptx",
+      "path": "270slides/8-Network Flow.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xbf in position 16: invalid start byte",
+      "key_concept": "",
+      "file": "3-Graphs.pptx",
+      "path": "270slides/3-Graphs.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xba in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "5-Greedy Algorithms.pptx",
+      "path": "270slides/5-Greedy Algorithms.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xe2 in position 14: invalid continuation byte",
+      "key_concept": "",
+      "file": "4-Dynamic Programming.pptx",
+      "path": "270slides/4-Dynamic Programming.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xdd in position 15: invalid continuation byte",
+      "key_concept": "",
+      "file": "6-Greedy Practice.pptx",
+      "path": "270slides/6-Greedy Practice.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xf7 in position 16: invalid start byte",
+      "key_concept": "",
+      "file": "10-Theory of Computation.pptx",
+      "path": "270slides/10-Theory of Computation.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xdc in position 14: invalid continuation byte",
+      "key_concept": "",
+      "file": "2-Proofs and Runtime.pptx",
+      "path": "270slides/2-Proofs and Runtime.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xce in position 15: invalid continuation byte",
+      "key_concept": "",
+      "file": "1-Introduction.pptx",
+      "path": "270slides/1-Introduction.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xaa in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "11-Extra Topics.pptx",
+      "path": "270slides/11-Extra Topics.pptx"
+    },
+    {
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x84 in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "9-P vs. NP.pptx",
+      "path": "270slides/9-P vs. NP.pptx"
+    }
+  ]
+}

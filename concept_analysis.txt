@@ -1,0 +1,58 @@
+Concept Analysis Results
+======================
+
+Found 22 unique concepts across 39 documents
+
+All Concepts by Frequency:
+  Dynamic Programming: 7 occurrences
+  NP-Completeness: 7 occurrences
+  Network Flow: 3 occurrences
+  Greedy Algorithms: 3 occurrences
+  Divide and Conquer: 2 occurrences
+  Poly-Time Reductions: 1 occurrences
+  Graph Reduction: 1 occurrences
+  Optimal Caching: 1 occurrences
+  Graph Connectivity: 1 occurrences
+  PSPACE: 1 occurrences
+  Halting Problem: 1 occurrences
+  Undecidability: 1 occurrences
+  Amortized Runtime Analysis: 1 occurrences
+  Proof by Induction: 1 occurrences
+  Proof Techniques: 1 occurrences
+  Algorithms: 1 occurrences
+  Union-Find: 1 occurrences
+  Data Structures: 1 occurrences
+  Asymptotic Complexity: 1 occurrences
+  Greedy Algorithm: 1 occurrences
+  Divide-and-Conquer: 1 occurrences
+  Flow Networks: 1 occurrences
+
+Concepts by Folder:
+
+270handout (30 documents):
+  Dynamic Programming: 5 occurrences
+  NP-Completeness: 5 occurrences
+  Network Flow: 3 occurrences
+  Greedy Algorithms: 3 occurrences
+  Divide and Conquer: 2 occurrences
+  Poly-Time Reductions: 1 occurrences
+  Graph Reduction: 1 occurrences
+  Optimal Caching: 1 occurrences
+  Graph Connectivity: 1 occurrences
+  PSPACE: 1 occurrences
+  Halting Problem: 1 occurrences
+  Undecidability: 1 occurrences
+  Amortized Runtime Analysis: 1 occurrences
+  Proof by Induction: 1 occurrences
+  Proof Techniques: 1 occurrences
+  Algorithms: 1 occurrences
+  Union-Find: 1 occurrences
+
+270questions (9 documents):
+  Dynamic Programming: 2 occurrences
+  NP-Completeness: 2 occurrences
+  Data Structures: 1 occurrences
+  Asymptotic Complexity: 1 occurrences
+  Greedy Algorithm: 1 occurrences
+  Divide-and-Conquer: 1 occurrences
+  Flow Networks: 1 occurrences
