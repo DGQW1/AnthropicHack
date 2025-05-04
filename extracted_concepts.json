@@ -1,7 +1,7 @@
 {
   "270handout": [
     {
-      "summary": "This document covers two dynamic programming problems: the coin changing problem and assembly-line scheduling, demonstrating how to break down complex optimization challenges into recursive subproblems with systematic decision-making strategies.",
+      "summary": "This document covers two dynamic programming problems: the coin changing problem (finding the minimum number of coins to make a target sum) and the assembly-line scheduling problem (finding the shortest path through manufacturing stations), both focusing on breaking down complex optimization challenges into recursive subproblems.",
       "key_concept": "Dynamic Programming",
       "file": "270handout7 (1).pdf",
       "path": "270handout/270handout7 (1).pdf"
@@ -62,7 +62,7 @@
     },
     {
       "summary": "This lecture discusses sequencing problems like the Travelling Salesman Problem and Longest Path, exploring the characteristics of NP-complete problems and highlighting that the complexity of a problem can vary significantly depending on its specific constraints.",
-      "key_concept": "NP-Completeness",
+      "key_concept": "NP-completeness",
       "file": "270handout26.pdf",
       "path": "270handout/270handout26.pdf"
     },
@@ -127,13 +127,13 @@
       "path": "270handout/270handout6.pdf"
     },
     {
-      "summary": "This lecture covers amortized runtime analysis, exploring the performance characteristics of list operations, binary counting, and minimum spanning tree algorithms like Kruskal's and Prim's, with a focus on understanding the average-case computational complexity of various algorithmic operations.",
+      "summary": "This lecture covers amortized runtime analysis, exploring the performance characteristics of list operations, binary counting, and minimum spanning tree algorithms like Kruskal's and Prim's, with a focus on understanding the average-case computational complexity of various algorithmic approaches.",
       "key_concept": "Amortized Runtime Analysis",
       "file": "270handout2.pdf",
       "path": "270handout/270handout2.pdf"
     },
     {
-      "summary": "This document discusses common proof errors when attempting to prove the correctness of Prim's Algorithm, and provides a detailed, step-by-step correct proof strategy for demonstrating that the algorithm produces an optimal minimum spanning tree.",
+      "summary": "This document discusses common proof errors when attempting to prove the correctness of Prim's Algorithm, and provides a detailed, step-by-step correct proof methodology for demonstrating that the algorithm produces an optimal minimum spanning tree.",
       "key_concept": "Proof by Induction",
       "file": "270handout12.pdf",
       "path": "270handout/270handout12.pdf"
@@ -169,7 +169,7 @@
       "path": "270handout/270handout17 (1).pdf"
     },
     {
-      "summary": "This lecture on Divide and Conquer introduces the algorithmic technique of solving problems by recursively splitting them into smaller, independent subproblems, discussing its application in algorithms like MergeSort and QuickSort, and exploring the Master Theorem for analyzing recurrence relations.",
+      "summary": "This lecture on Divide and Conquer introduces the algorithmic technique of solving problems by recursively splitting them into smaller, independent subproblems, demonstrating its application through examples like counting inversions and explaining the Master Theorem for analyzing recurrence relations.",
       "key_concept": "Divide and Conquer",
       "file": "270handout16 (1).pdf",
       "path": "270handout/270handout16 (1).pdf"
@@ -189,7 +189,7 @@
       "path": "270questions/270HW3.pdf"
     },
     {
-      "summary": "This homework assignment for CSCI 270 covers advanced data structure problems involving stacks, queues, amortized analysis, and sorting algorithms, with four specific algorithmic challenges related to stack/queue operations, runtime complexity, and k-sorted array sorting.",
+      "summary": "This homework assignment covers advanced data structure topics, including stack and queue operations, amortized runtime analysis, and an algorithm for sorting a k-sorted array.",
       "key_concept": "Data Structures",
       "file": "270HW2.pdf",
       "path": "270questions/270HW2.pdf"
@@ -237,72 +237,5 @@
       "path": "270questions/270HW8.pdf"
     }
   ],
-  "270slides": [
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x95 in position 16: invalid start byte",
-      "key_concept": "",
-      "file": "7-Divide & Conquer.pptx",
-      "path": "270slides/7-Divide & Conquer.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x84 in position 14: invalid start byte",
-      "key_concept": "",
-      "file": "8-Network Flow.pptx",
-      "path": "270slides/8-Network Flow.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xbf in position 16: invalid start byte",
-      "key_concept": "",
-      "file": "3-Graphs.pptx",
-      "path": "270slides/3-Graphs.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xba in position 14: invalid start byte",
-      "key_concept": "",
-      "file": "5-Greedy Algorithms.pptx",
-      "path": "270slides/5-Greedy Algorithms.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xe2 in position 14: invalid continuation byte",
-      "key_concept": "",
-      "file": "4-Dynamic Programming.pptx",
-      "path": "270slides/4-Dynamic Programming.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xdd in position 15: invalid continuation byte",
-      "key_concept": "",
-      "file": "6-Greedy Practice.pptx",
-      "path": "270slides/6-Greedy Practice.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xf7 in position 16: invalid start byte",
-      "key_concept": "",
-      "file": "10-Theory of Computation.pptx",
-      "path": "270slides/10-Theory of Computation.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xdc in position 14: invalid continuation byte",
-      "key_concept": "",
-      "file": "2-Proofs and Runtime.pptx",
-      "path": "270slides/2-Proofs and Runtime.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xce in position 15: invalid continuation byte",
-      "key_concept": "",
-      "file": "1-Introduction.pptx",
-      "path": "270slides/1-Introduction.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xaa in position 14: invalid start byte",
-      "key_concept": "",
-      "file": "11-Extra Topics.pptx",
-      "path": "270slides/11-Extra Topics.pptx"
-    },
-    {
-      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x84 in position 14: invalid start byte",
-      "key_concept": "",
-      "file": "9-P vs. NP.pptx",
-      "path": "270slides/9-P vs. NP.pptx"
-    }
-  ]
+  "270slides": []
 }
