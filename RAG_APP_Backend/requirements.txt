@@ -1,0 +1,12 @@
+# Core dependencies
+pymupdf==1.23.7
+faiss-cpu==1.7.4
+numpy>=1.22.0
+anthropic==0.8.1
+voyageai==0.1.6
+llama-index-core>=0.10.0
+llama-index-vector-stores-faiss>=0.1.0
+
+# Utils
+tqdm>=4.65.0
+python-dotenv>=1.0.0
