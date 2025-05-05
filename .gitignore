@@ -21,6 +21,7 @@ htmlcov/
 # Data files
 data/
 rag_backend/data/
+RAG_APP_Backend/
 
 # Log files
 *.log

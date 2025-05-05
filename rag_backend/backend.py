@@ -18,77 +18,214 @@ from llama_index.core import ServiceContext, StorageContext, VectorStoreIndex
 from llama_index.vector_stores.faiss import FaissVectorStore
 from llama_index.core.query_engine import RetrieverQueryEngine
 
+class PDFtoText:
+    """Utility class to extract text from PDF files"""
+    
+    @staticmethod
+    def extract_text(file_path):
+        """
+        Extract text from a PDF file
+        
+        Args:
+            file_path: Path to the PDF file
+            
+        Returns:
+            str: The extracted text content
+        """
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"File not found: {file_path}")
+            
+        if not file_path.lower().endswith('.pdf'):
+            raise ValueError(f"File is not a PDF: {file_path}")
+            
+        try:
+            doc = fitz.open(file_path)
+            full_text = ""
+            for page in doc:
+                full_text += "\n\n" + page.get_text().strip()
+            return full_text
+        except Exception as e:
+            raise IOError(f"Error extracting text from PDF: {str(e)}")
+    
+    @staticmethod
+    def extract_text_with_limit(file_path, max_length=20000):
+        """
+        Extract text from a PDF file with a length limit
+        
+        Args:
+            file_path: Path to the PDF file
+            max_length: Maximum number of characters to extract
+            
+        Returns:
+            str: The extracted text content, truncated if necessary
+        """
+        text = PDFtoText.extract_text(file_path)
+        if len(text) > max_length:
+            print(f"Text too long ({len(text)} chars), truncating to {max_length} chars")
+            return text[:max_length]
+        return text
+
+class MetadataGenerator:
+    """Generates metadata for files including extracting concepts and summaries"""
+    
+    def __init__(self, anthropic_client):
+        self.client = anthropic_client
+        self.concept_extractor = ConceptExtractor(anthropic_client)
+        
+    def generate_metadata(self, file_path):
+        """
+        Extract concepts and metadata from a file
+        
+        Args:
+            file_path: Path to the file to process
+            
+        Returns:
+            dict: Contains path, filename, summary, key_concept, and category
+        """
+        print(f"Processing: {file_path}")
+        try:
+            # First extract the text content
+            if file_path.lower().endswith('.pdf'):
+                try:
+                    file_text = PDFtoText.extract_text_with_limit(file_path)
+                except Exception as e:
+                    print(f"Error extracting PDF text: {e}")
+                    return {
+                        "path": file_path,
+                        "filename": os.path.basename(file_path),
+                        "summary": f"Error extracting PDF text: {str(e)}",
+                        "key_concept": "",
+                        "category": self._determine_category(file_path)
+                    }
+            else:
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        file_text = f.read()
+                        # Truncate if needed
+                        max_length = 20000
+                        if len(file_text) > max_length:
+                            print(f"Text too long ({len(file_text)} chars), truncating to {max_length} chars")
+                            file_text = file_text[:max_length]
+                except Exception as e:
+                    print(f"Error reading file: {e}")
+                    return {
+                        "path": file_path,
+                        "filename": os.path.basename(file_path),
+                        "summary": f"Error reading file: {str(e)}",
+                        "key_concept": "",
+                        "category": self._determine_category(file_path)
+                    }
+            
+            # Use our extract_file_concept method with the extracted text
+            result = self.concept_extractor.extract_file_concept(file_text=file_text)
+            
+            # Add file information
+            result["path"] = file_path
+            result["filename"] = os.path.basename(file_path)
+            
+            # Add category based on file path
+            result["category"] = self._determine_category(file_path)
+            
+            return result
+        except Exception as e:
+            print(f"Error processing {file_path}: {e}")
+            return {
+                "path": file_path,
+                "filename": os.path.basename(file_path),
+                "summary": f"Error: {str(e)}",
+                "key_concept": "",
+                "category": self._determine_category(file_path)
+            }
+    
+    def _determine_category(self, file_path):
+        """
+        Determine the category of a file based on its path
+        
+        Args:
+            file_path: Path to the file
+            
+        Returns:
+            str: The category (slide, handout, question)
+        """
+        if "270slides" in file_path:
+            return "slide"
+        elif "270handout" in file_path:
+            return "handout"
+        elif "270questions" in file_path:
+            return "question"
+        else:
+            return "other"
+
 class ConceptExtractor:
     """Extracts key concepts from documents using LLM"""
     
     def __init__(self, anthropic_client):
         self.client = anthropic_client
     
-    def extract_file_concept(self, file_path):
+    def extract_file_concept(self, file_text=None, file_path=None):
         """
-        Process a file to generate a one-sentence summary and extract a single key concept.
-        This function reads the entire file and uses Claude 3.5 Haiku to generate the summary and concept.
+        Process text content to generate a one-sentence summary and extract a single key concept.
+        Uses Claude 3.5 Haiku to generate the summary and concept.
         
         Args:
-            file_path: Path to the file to process
+            file_text: The text content to process. If None, will try to read from file_path.
+            file_path: Optional path to a file to process if file_text is not provided
             
         Returns:
             dict: Contains 'summary' (one sentence) and 'key_concept' (single concept)
         """
         try:
-            # Check if file exists
-            if not os.path.exists(file_path):
+            # Get the text content either from provided text or file
+            if file_text is None and file_path is not None:
+                try:
+                    if file_path.lower().endswith('.pdf'):
+                        # Use our PDFtoText utility for PDFs
+                        file_text = PDFtoText.extract_text_with_limit(file_path)
+                    else:
+                        # Handle text files
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            file_text = f.read()
+                            # Truncate if needed
+                            max_length = 20000
+                            if len(file_text) > max_length:
+                                print(f"Text too long ({len(file_text)} chars), truncating to {max_length} chars")
+                                file_text = file_text[:max_length]
+                except Exception as e:
+                    return {
+                        "summary": f"Error reading file: {str(e)}",
+                        "key_concept": ""
+                    }
+            
+            # Ensure we have content to process
+            if not file_text:
                 return {
-                    "summary": f"File not found: {file_path}",
+                    "summary": "No content provided",
                     "key_concept": ""
                 }
-            
-            # Read the entire file directly
-            try:
-                if file_path.lower().endswith('.pdf'):
-                    # Handle PDF files
-                    doc = fitz.open(file_path)
-                    full_text = ""
-                    for page in doc:
-                        full_text += "\n\n" + page.get_text().strip()
-                else:
-                    # Handle text files
-                    with open(file_path, 'r', encoding='utf-8') as f:
-                        full_text = f.read()
-            except Exception as e:
-                return {
-                    "summary": f"Error reading file: {str(e)}",
-                    "key_concept": ""
-                }
-            
-            # Truncate if text is too long
-            max_length = 20000  # Claude's context limit is higher, but we'll be conservative
-            if len(full_text) > max_length:
-                print(f"Text too long ({len(full_text)} chars), truncating to {max_length} chars")
-                full_text = full_text[:max_length]
             
             # If Claude API is not available, fall back to basic extraction
             if not self.client:
                 # Extract a basic summary from first paragraph
-                paragraphs = full_text.split('\n\n')
+                paragraphs = file_text.split('\n\n')
                 basic_summary = paragraphs[0][:200] + "..." if paragraphs and len(paragraphs[0]) > 200 else paragraphs[0] if paragraphs else "Summary not available"
                 
                 # Extract a basic concept using our frequency approach
-                basic_concept = self.extract_concepts_basic(full_text)[0] if full_text else "concept not available"
+                basic_concept = self.extract_concepts_basic(file_text)[0] if file_text else "concept not available"
                 
                 return {
-                    "summary": basic_summary,
-                    "key_concept": basic_concept
+                    # "summary": basic_summary,
+                    # "key_concept": basic_concept
+                    "summary": "Claude API not available",
                 }
             
-            # First call: Summarize the entire file in one sentence
+            # First call: Summarize the content in one sentence
             try:
                 summary_prompt = f"""
                 This is content from a computer science education document.
                 
-                Content: {full_text}
+                Content: {file_text}
                 
-                Please summarize this document in exactly one sentence. Focus on the main topic being discussed.
+                Please summarize this document in exactly one sentence less than 20 words. Focus on the main topic being discussed.
                 """
                 
                 summary_response = self.client.messages.create(
@@ -112,7 +249,7 @@ class ConceptExtractor:
                 concept_prompt = f"""
                 This is content from a computer science education document.
                 
-                Content: {full_text}
+                Content: {file_text}
                 
                 What is the single most important computer science concept discussed in this document?
                 Return ONLY the concept name, with no additional text or explanation.
@@ -148,9 +285,9 @@ class ConceptExtractor:
                 }
                 
         except Exception as e:
-            print(f"Error in file processing: {e}")
+            print(f"Error in content processing: {e}")
             return {
-                "summary": f"Error processing file: {str(e)}",
+                "summary": f"Error processing content: {str(e)}",
                 "key_concept": ""
             }
     

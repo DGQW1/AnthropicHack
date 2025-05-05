@@ -54,17 +54,39 @@ def extract_concepts(file_path):
         result = concept_extractor.extract_file_concept(file_path)
         
         # Add filename to the result
-        result["file"] = os.path.basename(file_path)
+        #result["file"] = os.path.basename(file_path)
         result["path"] = file_path
+        # Add category
+        # from the folder name, if folder = 270slides, category = slides
+        # if folder = 270handout, category = handout
+        # if folder = 270questions, category = questions
+        category = ""
+        if "270slides" in file_path:
+            category = "slide"
+        elif "270handout" in file_path:
+            category = "handout"
+        elif "270questions" in file_path:
+            category = "question"
+        result["category"] = category
         
         return result
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
+        # category
+        category = ""
+        if "270slides" in file_path:
+            category = "slide"
+        elif "270handout" in file_path:
+            category = "handout"
+        elif "270questions" in file_path:
+            category = "question"
+        # Return a result with an error message
+
         return {
-            "file": os.path.basename(file_path),
             "path": file_path,
             "summary": f"Error: {str(e)}",
-            "key_concept": ""
+            "key_concept": "",
+            "category": category
         }
 
 def main():
