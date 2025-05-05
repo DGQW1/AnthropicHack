@@ -1,7 +1,7 @@
 {
   "270handout": [
     {
-      "summary": "This document discusses dynamic programming solutions for two optimization problems: the coin changing problem (finding the minimum number of coins to make a target sum) and the assembly-line scheduling problem (finding the shortest path through manufacturing stations), both involving recursive decision-making and optimal substructure.",
+      "summary": "This document covers two dynamic programming problems: the coin changing problem and assembly-line scheduling, demonstrating how to break down complex optimization challenges into recursive subproblems with systematic decision-making strategies.",
       "key_concept": "Dynamic Programming",
       "path": "270handout/270handout7 (1).pdf",
       "category": "handout"
@@ -62,9 +62,9 @@
     },
     {
       "summary": "This lecture discusses sequencing problems like the Travelling Salesman Problem and Longest Path, exploring the characteristics of NP-complete problems and highlighting that the complexity of a problem can vary significantly depending on its specific constraints.",
-      "key_concept": "NP-completeness",
-      "path": "270handout/270handout26.pdf",
-      "category": "handout"
+      "key_concept": "NP-Completeness",
+      "file": "270handout26.pdf",
+      "path": "270handout/270handout26.pdf"
     },
     {
       "summary": "This document discusses two main algorithmic topics: sequence alignment (specifically an efficient method for calculating edit distance between strings using divide-and-conquer) and network flow (exploring the max-flow min-cut problem and the Ford-Fulkerson algorithm for finding augmenting paths in a residual graph).",
@@ -127,7 +127,7 @@
       "category": "handout"
     },
     {
-      "summary": "This lecture covers amortized runtime analysis, exploring the performance characteristics of list operations, binary counting, and minimum spanning tree algorithms like Kruskal's and Prim's, with a focus on understanding the average-case computational complexity of various algorithmic operations.",
+      "summary": "This lecture covers amortized runtime analysis, exploring the performance characteristics of list operations, binary counting, and minimum spanning tree algorithms like Kruskal's and Prim's, with a focus on understanding the average-case computational complexity of various algorithmic approaches.",
       "key_concept": "Amortized Runtime Analysis",
       "path": "270handout/270handout2.pdf",
       "category": "handout"
@@ -169,7 +169,7 @@
       "category": "handout"
     },
     {
-      "summary": "This lecture on Divide and Conquer explores a runtime improvement technique that involves splitting problems into smaller, independent subproblems, solving them recursively, and then combining the results, with a focus on understanding its principles, analyzing algorithms like counting inversions, and applying the Master Theorem to solve recurrence relations.",
+      "summary": "This lecture on Divide and Conquer introduces the algorithmic technique of solving problems by recursively splitting them into smaller, independent subproblems, discussing its application in algorithms like MergeSort and QuickSort, and exploring the Master Theorem for analyzing recurrence relations.",
       "key_concept": "Divide and Conquer",
       "path": "270handout/270handout16 (1).pdf",
       "category": "handout"
@@ -189,7 +189,7 @@
       "category": "question"
     },
     {
-      "summary": "This homework assignment for CSCI 270 covers advanced data structure problems involving stacks, queues, amortized analysis, and sorting algorithms, with specific challenges related to stack/queue operations, sequence validation, and k-sorted array sorting.",
+      "summary": "This homework assignment for CSCI 270 covers advanced data structure problems involving stacks, queues, amortized analysis, and sorting algorithms, with four specific algorithmic challenges related to stack/queue operations, runtime complexity, and k-sorted array sorting.",
       "key_concept": "Data Structures",
       "path": "270questions/270HW2.pdf",
       "category": "question"
@@ -239,70 +239,70 @@
   ],
   "270slides": [
     {
-      "summary": "This document provides a comprehensive review of mathematical proofs, runtime analysis techniques, recurrence relations, and amortized analysis, covering topics such as proof by contradiction, induction, the Master Theorem, and analyzing the computational complexity of algorithms like Mergesort and vector operations.",
-      "key_concept": "Amortized Runtime",
-      "path": "270slides/2-Proofs and Runtime.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x95 in position 16: invalid start byte",
+      "key_concept": "",
+      "file": "7-Divide & Conquer.pptx",
+      "path": "270slides/7-Divide & Conquer.pptx"
     },
     {
-      "summary": "This document explores the Divide and Conquer algorithm design technique, demonstrating its application across various computational problems like counting inversions, matrix multiplication, sequence alignment, and closest points finding, showing how breaking large problems into smaller, manageable subproblems can lead to more efficient algorithmic solutions.",
-      "key_concept": "Divide and Conquer",
-      "path": "270slides/7-Divide & Conquer.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x84 in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "8-Network Flow.pptx",
+      "path": "270slides/8-Network Flow.pptx"
     },
     {
-      "summary": "This document introduces fundamental concepts in algorithms and theory of computing, exploring problem-solving techniques through examples like the Famous Person Problem and the Gale-Shapley Algorithm, while emphasizing the importance of algorithmic thinking, efficiency, and ethical considerations in computer science.",
-      "key_concept": "Algorithms",
-      "path": "270slides/1-Introduction.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xbf in position 16: invalid start byte",
+      "key_concept": "",
+      "file": "3-Graphs.pptx",
+      "path": "270slides/3-Graphs.pptx"
     },
     {
-      "summary": "This document provides a comprehensive exploration of graph algorithms, focusing on Kruskal's algorithm for minimum spanning trees, Union-Find data structures, sorting algorithms like Radix Sort, graph properties such as bipartiteness and connectivity, and methods for finding topological orderings in directed acyclic graphs (DAGs).",
-      "key_concept": "Union-Find Data Structure",
-      "path": "270slides/3-Graphs.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xba in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "5-Greedy Algorithms.pptx",
+      "path": "270slides/5-Greedy Algorithms.pptx"
     },
     {
-      "summary": "This document explores PSPACE complexity class by discussing space complexity, Savitch's Theorem, PSPACE-Complete problems like True Quantified Boolean Formula (TQBF) and Generalized Geography, and demonstrating how these problems can be understood through strategic game-like scenarios involving variable assignments and graph traversals.",
-      "key_concept": "PSPACE",
-      "path": "270slides/11-Extra Topics.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xe2 in position 14: invalid continuation byte",
+      "key_concept": "",
+      "file": "4-Dynamic Programming.pptx",
+      "path": "270slides/4-Dynamic Programming.pptx"
     },
     {
-      "summary": "This document discusses proof techniques for two greedy algorithm problems: one involving optimally placing pizza parlors along a road and another involving minimizing pizza preparation and baking time by scheduling pizzas in a specific order.",
-      "key_concept": "Greedy Algorithms",
-      "path": "270slides/6-Greedy Practice.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xdd in position 15: invalid continuation byte",
+      "key_concept": "",
+      "file": "6-Greedy Practice.pptx",
+      "path": "270slides/6-Greedy Practice.pptx"
     },
     {
-      "summary": "This document provides an in-depth exploration of greedy algorithms, explaining their core principles, demonstrating their application across various problems like interval scheduling, minimum spanning trees, task scheduling, and caching, and showing how to prove their correctness using exchange arguments and inductive reasoning.",
-      "key_concept": "Greedy Algorithms",
-      "path": "270slides/5-Greedy Algorithms.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xf7 in position 16: invalid start byte",
+      "key_concept": "",
+      "file": "10-Theory of Computation.pptx",
+      "path": "270slides/10-Theory of Computation.pptx"
     },
     {
-      "summary": "This document explores the concept of NP-completeness by examining various computational problems, demonstrating how different problems can be reduced to each other, and discussing the fundamental question of whether P equals NP.",
-      "key_concept": "NP-Complete Problems",
-      "path": "270slides/9-P vs. NP.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xdc in position 14: invalid continuation byte",
+      "key_concept": "",
+      "file": "2-Proofs and Runtime.pptx",
+      "path": "270slides/2-Proofs and Runtime.pptx"
     },
     {
-      "summary": "This document provides a comprehensive overview of Network Flow algorithms, exploring concepts like Ford-Fulkerson method, residual graphs, max-flow min-cut theorem, and demonstrating polynomial-time reductions of various problems like Bipartite Matching, Circulations, Survey Design, Baseball Elimination, and Project Selection to network flow problems.",
-      "key_concept": "Network Flow",
-      "path": "270slides/8-Network Flow.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xce in position 15: invalid continuation byte",
+      "key_concept": "",
+      "file": "1-Introduction.pptx",
+      "path": "270slides/1-Introduction.pptx"
     },
     {
-      "summary": "This document provides a comprehensive overview of Dynamic Programming, explaining its core concept of transforming recursive algorithms with repeated work into efficient iterative solutions by solving subproblems once and storing their results, with detailed explanations and examples across various problem domains like Fibonacci, Weighted Interval Scheduling, Longest Increasing Subsequence, Coin Changing, Sequence Alignment, and RNA Secondary Structure.",
-      "key_concept": "Dynamic Programming",
-      "path": "270slides/4-Dynamic Programming.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0xaa in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "11-Extra Topics.pptx",
+      "path": "270slides/11-Extra Topics.pptx"
     },
     {
-      "summary": "The document explores the Theory of Computation by demonstrating through proofs and examples that certain computational problems, such as the Halting Problem and the Post Correspondence Problem, are fundamentally unsolvable due to the inherent limitations of algorithms and computational methods.",
-      "key_concept": "Halting Problem",
-      "path": "270slides/10-Theory of Computation.pdf",
-      "category": "slide"
+      "summary": "Error reading file: 'utf-8' codec can't decode byte 0x84 in position 14: invalid start byte",
+      "key_concept": "",
+      "file": "9-P vs. NP.pptx",
+      "path": "270slides/9-P vs. NP.pptx"
     }
   ]
 }

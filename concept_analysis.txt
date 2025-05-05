@@ -1,11 +1,11 @@
 Concept Analysis Results
 ======================
 
-Found 22 unique concepts across 39 documents
+Found 23 unique concepts across 39 documents
 
 All Concepts by Frequency:
   Dynamic Programming: 7 occurrences
-  NP-Completeness: 7 occurrences
+  NP-Completeness: 6 occurrences
   Network Flow: 3 occurrences
   Greedy Algorithms: 3 occurrences
   Divide and Conquer: 2 occurrences
@@ -13,6 +13,7 @@ All Concepts by Frequency:
   Graph Reduction: 1 occurrences
   Optimal Caching: 1 occurrences
   Graph Connectivity: 1 occurrences
+  NP-completeness: 1 occurrences
   PSPACE: 1 occurrences
   Halting Problem: 1 occurrences
   Undecidability: 1 occurrences
@@ -31,7 +32,7 @@ Concepts by Folder:
 
 270handout (30 documents):
   Dynamic Programming: 5 occurrences
-  NP-Completeness: 5 occurrences
+  NP-Completeness: 4 occurrences
   Network Flow: 3 occurrences
   Greedy Algorithms: 3 occurrences
   Divide and Conquer: 2 occurrences
@@ -39,6 +40,7 @@ Concepts by Folder:
   Graph Reduction: 1 occurrences
   Optimal Caching: 1 occurrences
   Graph Connectivity: 1 occurrences
+  NP-completeness: 1 occurrences
   PSPACE: 1 occurrences
   Halting Problem: 1 occurrences
   Undecidability: 1 occurrences
