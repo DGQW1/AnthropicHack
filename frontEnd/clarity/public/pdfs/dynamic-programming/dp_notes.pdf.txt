@@ -1,0 +1,3 @@
+This is a placeholder for Dynamic Programming notes PDF.
+In a real implementation, this would be an actual PDF file with detailed notes.
+You would need to replace this with a real PDF file before deploying. 

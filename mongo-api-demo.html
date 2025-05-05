@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MongoDB Data API Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .file-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        .question-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0069d9;
+        }
+        select, button {
+            padding: 8px;
+            margin-right: 10px;
+        }
+        .info {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .loading {
+            display: none;
+            color: #666;
+            font-style: italic;
+        }
+        #error-message {
+            color: #dc3545;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Data API Demo</h1>
+    <p>This page demonstrates accessing MongoDB using the Data API endpoints.</p>
+
+    <div class="container">
+        <h2>All Files</h2>
+        <button id="load-files-btn" class="btn">Load All Files</button>
+        <span id="files-loading" class="loading">Loading...</span>
+        <div id="files-list"></div>
+    </div>
+
+    <div class="container">
+        <h2>Homework Questions</h2>
+        <div>
+            <label for="hw-selector">Homework Number:</label>
+            <select id="hw-selector">
+                <option value="" selected disabled>Select a homework</option>
+                <option value="1">Homework 1</option>
+                <option value="2">Homework 2</option>
+                <option value="3">Homework 3</option>
+                <option value="4">Homework 4</option>
+                <option value="5">Homework 5</option>
+            </select>
+            <button id="load-hw-btn" class="btn">Load Questions</button>
+        </div>
+        <span id="questions-loading" class="loading">Loading...</span>
+        <div id="questions-list"></div>
+    </div>
+
+    <div class="container">
+        <h2>File Lookup</h2>
+        <div>
+            <label for="filename-input">Filename:</label>
+            <input type="text" id="filename-input" placeholder="e.g., 270HW1_question1.pdf" style="padding: 8px; width: 250px;">
+            <button id="lookup-file-btn" class="btn">Lookup File</button>
+        </div>
+        <span id="file-loading" class="loading">Loading...</span>
+        <div id="file-info"></div>
+    </div>
+
+    <div id="error-message"></div>
+
+    <script>
+        // Base URL for API
+        const API_BASE_URL = "http://localhost:3001";
+
+        // Helper function to format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Helper function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString();
+        }
+
+        // Helper function to show error
+        function showError(message) {
+            const errorEl = document.getElementById('error-message');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Load all files
+        async function loadAllFiles() {
+            const filesLoading = document.getElementById('files-loading');
+            const filesList = document.getElementById('files-list');
+            
+            try {
+                filesLoading.style.display = 'inline';
+                
+                const response = await fetch(`${API_BASE_URL}/api/files`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch files: ${response.status} ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                
+                filesList.innerHTML = '';
+                
+                if (result.files && result.files.length > 0) {
+                    result.files.forEach(file => {
+                        const fileItem = document.createElement('div');
+                        fileItem.classList.add('file-item');
+                        
+                        const fileLink = document.createElement('a');
+                        fileLink.href = `${API_BASE_URL}/api/file/${file.filename}`;
+                        fileLink.textContent = file.filename;
+                        fileLink.target = '_blank';
+                        
+                        const fileInfo = document.createElement('span');
+                        fileInfo.classList.add('info');
+                        fileInfo.textContent = ` (${formatFileSize(file.size)}, uploaded ${formatDate(file.uploadDate)})`;
+                        
+                        fileItem.appendChild(fileLink);
+                        fileItem.appendChild(fileInfo);
+                        filesList.appendChild(fileItem);
+                    });
+                } else {
+                    filesList.innerHTML = '<p>No files found</p>';
+                }
+            } catch (error) {
+                console.error("Error loading files:", error);
+                showError(`Error loading files: ${error.message}`);
+                filesList.innerHTML = '<p>Error loading files. See console for details.</p>';
+            } finally {
+                filesLoading.style.display = 'none';
+            }
+        }
+
+        // Load homework questions
+        async function loadHomeworkQuestions(hwNumber) {
+            const questionsLoading = document.getElementById('questions-loading');
+            const questionsList = document.getElementById('questions-list');
+            
+            try {
+                questionsLoading.style.display = 'inline';
+                
+                const response = await fetch(`${API_BASE_URL}/api/homework/${hwNumber}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch homework ${hwNumber}: ${response.status} ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                
+                questionsList.innerHTML = '';
+                
+                if (result.questions && result.questions.length > 0) {
+                    const heading = document.createElement('h3');
+                    heading.textContent = `Homework #${hwNumber} - ${result.questions.length} questions`;
+                    questionsList.appendChild(heading);
+                    
+                    result.questions.forEach(question => {
+                        const questionItem = document.createElement('div');
+                        questionItem.classList.add('question-item');
+                        
+                        const questionTitle = document.createElement('h4');
+                        questionTitle.textContent = `Question ${question.questionNumber}`;
+                        
+                        const viewLink = document.createElement('a');
+                        viewLink.href = `${API_BASE_URL}${question.downloadUrl}`;
+                        viewLink.textContent = 'View Question';
+                        viewLink.target = '_blank';
+                        viewLink.classList.add('btn');
+                        
+                        questionItem.appendChild(questionTitle);
+                        questionItem.appendChild(viewLink);
+                        questionsList.appendChild(questionItem);
+                    });
+                } else {
+                    questionsList.innerHTML = `<p>No questions found for Homework #${hwNumber}</p>`;
+                }
+            } catch (error) {
+                console.error(`Error loading homework ${hwNumber}:`, error);
+                showError(`Error loading homework: ${error.message}`);
+                questionsList.innerHTML = '<p>Error loading questions. See console for details.</p>';
+            } finally {
+                questionsLoading.style.display = 'none';
+            }
+        }
+
+        // Lookup file
+        async function lookupFile(filename) {
+            const fileLoading = document.getElementById('file-loading');
+            const fileInfo = document.getElementById('file-info');
+            
+            try {
+                fileLoading.style.display = 'inline';
+                
+                const response = await fetch(`${API_BASE_URL}/api/file-info/${filename}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch file info: ${response.status} ${response.statusText}`);
+                }
+                
+                const file = await response.json();
+                
+                fileInfo.innerHTML = `
+                    <h3>${file.filename}</h3>
+                    <p>
+                        <strong>Size:</strong> ${formatFileSize(file.size)}<br>
+                        <strong>Type:</strong> ${file.contentType}<br>
+                        <strong>Uploaded:</strong> ${formatDate(file.uploadDate)}<br>
+                        <strong>ID:</strong> ${file.id}
+                    </p>
+                    <p>
+                        <a href="${API_BASE_URL}${file.downloadUrl}" target="_blank" class="btn">View File</a>
+                        <a href="${API_BASE_URL}${file.downloadUrl}" download class="btn">Download File</a>
+                    </p>
+                `;
+                
+                // Show metadata if available
+                if (file.metadata) {
+                    const metadataSection = document.createElement('div');
+                    metadataSection.innerHTML = `<h4>Metadata</h4>`;
+                    
+                    const metadataList = document.createElement('ul');
+                    for (const [key, value] of Object.entries(file.metadata)) {
+                        const metadataItem = document.createElement('li');
+                        metadataItem.textContent = `${key}: ${value}`;
+                        metadataList.appendChild(metadataItem);
+                    }
+                    
+                    metadataSection.appendChild(metadataList);
+                    fileInfo.appendChild(metadataSection);
+                }
+            } catch (error) {
+                console.error("Error looking up file:", error);
+                showError(`Error looking up file: ${error.message}`);
+                fileInfo.innerHTML = '<p>Error looking up file. See console for details.</p>';
+            } finally {
+                fileLoading.style.display = 'none';
+            }
+        }
+
+        // Set up event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load files button
+            document.getElementById('load-files-btn').addEventListener('click', () => {
+                loadAllFiles();
+            });
+            
+            // Homework selector
+            document.getElementById('load-hw-btn').addEventListener('click', () => {
+                const hwNumber = document.getElementById('hw-selector').value;
+                if (hwNumber) {
+                    loadHomeworkQuestions(hwNumber);
+                } else {
+                    showError('Please select a homework number');
+                }
+            });
+            
+            // File lookup
+            document.getElementById('lookup-file-btn').addEventListener('click', () => {
+                const filename = document.getElementById('filename-input').value.trim();
+                if (filename) {
+                    lookupFile(filename);
+                } else {
+                    showError('Please enter a filename');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
